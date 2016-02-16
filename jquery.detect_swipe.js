@@ -39,7 +39,7 @@
       }
       if(dir) {
         onTouchEnd.call(this);
-        $(this).trigger('swipe', dir).trigger('swipe' + dir);
+        $(this).trigger('swipe', dir, [startX, startY]).trigger('swipe' + dir, [startX, startY]);
       }
     }
   }
