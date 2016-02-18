@@ -13,7 +13,8 @@
     threshold: 20
   };
 
-  var startX,
+  var startE,
+    startX,
     startY,
     isMoving = false;
 
@@ -39,13 +40,14 @@
       }
       if(dir) {
         onTouchEnd.call(this);
-        $(this).trigger('swipe', dir, [startX, startY]).trigger('swipe' + dir, [startX, startY]);
+        $(this).trigger('swipe', dir, startE, e).trigger('swipe' + dir, startE, e);
       }
     }
   }
 
   function onTouchStart(e) {
     if (e.touches.length == 1) {
+      startE = e;
       startX = e.touches[0].pageX;
       startY = e.touches[0].pageY;
       isMoving = true;
