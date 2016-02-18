@@ -13,8 +13,7 @@
     threshold: 20
   };
 
-  var startE,
-    startX,
+  var startX,
     startY,
     isMoving = false;
 
@@ -31,6 +30,7 @@
       var y = e.touches[0].pageY;
       var dx = startX - x;
       var dy = startY - y;
+      var xy = [startX, startY]
       var dir;
       if(Math.abs(dx) >= $.detectSwipe.threshold) {
         dir = dx > 0 ? 'left' : 'right'
@@ -40,14 +40,13 @@
       }
       if(dir) {
         onTouchEnd.call(this);
-        $(this).trigger('swipe', dir, startE, e).trigger('swipe' + dir, startE, e);
+        $(this).trigger('swipe', [dir, startX, startY]).trigger('swipe' + dir, [startX, startY]);
       }
     }
   }
 
   function onTouchStart(e) {
     if (e.touches.length == 1) {
-      startE = e;
       startX = e.touches[0].pageX;
       startY = e.touches[0].pageY;
       isMoving = true;
